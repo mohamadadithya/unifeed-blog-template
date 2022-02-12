@@ -1,0 +1,233 @@
+:root {
+    --clrPrimary: hsl(0, 0%, 5%);
+    --clrSecondary: hsl(0, 0%, 41%);
+    --clrButton: hsl(30, 90%, 49%);
+    --clrWhite: hsl(0, 0%, 100%);
+    --fontNormal: 400;
+    --fontBold: 700;
+
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+}
+
+@mixin respond ($breakpoint) {
+    @if $breakpoint==tablet {
+        @media (min-width: 768px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint==desktop {
+        @media (min-width: 992px) {
+            @content;
+        }
+    }
+}
+
+@mixin flexBetweenCenter() {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    vertical-align: baseline;
+    font-family: inherit;
+    font-size: inherit;
+    border: none;
+    outline: none;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    padding-top: 120px;
+    padding-bottom: 2.5rem;
+}
+
+img {
+    object-fit: cover;
+    width: 100%;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    padding: 1.8rem 0;
+    width: 100%;
+    background-color: var(--clrWhite);
+
+    .container {
+        display: block;
+
+        @include respond(tablet) {
+            @include flexBetweenCenter();
+        }
+    }
+
+    &__list {
+        display: none;
+        font-size: 1.3rem;
+        margin-top: 2rem;
+
+        @include respond(tablet) {
+            display: flex;
+            align-items: center;
+            margin-top: 0;
+            font-size: 1rem;
+        }
+
+        &.open {
+            display: inline-block;
+        }
+    }
+
+    &__item {
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+            background-color: var(--clrButton);
+            padding: .8rem 1rem;
+            font-weight: var(--fontBold);
+            border-radius: 4px;
+            transition: .5s all ease;
+
+            &:hover {
+                transform: scale(.94);
+            }
+        }
+
+        @include respond(tablet) {
+            margin-bottom: 0;
+            margin-right: 1.5rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &__link {
+        color: var(--clrSecondary);
+
+        &.button {
+            color: var(--clrPrimary);
+        }
+    }
+
+    &__hamburger {
+        display: block;
+        cursor: pointer;
+
+        @include respond(tablet) {
+            display: none;
+        }
+    }
+}
+
+.row {
+    &:nth-child(2) {
+        display: block;
+
+        @include respond(desktop) {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+.article {
+    margin-bottom: 3rem;
+
+    &.main {
+        display: block;
+
+        @include respond(desktop) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+    }
+
+    &__image {
+        margin-bottom: 1rem;
+        border-radius: 5px;
+
+        @include respond(tablet) {
+            max-height: 200px;
+        }
+
+        @include respond(desktop) {
+            max-height: 808px;
+        }
+    }
+
+    &__title {
+        display: block;
+        font-weight: var(--fontBold);
+        font-size: 2rem;
+        margin-bottom: .8rem;
+        color: var(--clrPrimary);
+    }
+
+    &__description {
+        color: var(--clrSecondary);
+        margin-bottom: 1.4rem;
+    }
+
+    &__avatar {
+        max-width: 60px;
+        margin-right: 1rem;
+
+        &--role {
+            color: var(--clrSecondary);
+        }
+    }
+}
+
+.footer {
+    display: block;
+
+    @include respond(tablet) {
+        @include flexBetweenCenter();
+    }
+
+    &__copyright {
+        margin-top: .85rem;
+        color: var(--clrSecondary);
+    }
+}
+
+/* Utility Classes */
+.container {
+    margin: 0 2rem;
+
+    @include respond(tablet) {
+        margin: 0 4rem;
+    }
+
+    @include respond(desktop) {
+        margin: 0 8rem;
+    }
+}
+
+.flex {
+    display: flex;
+
+    &.justify-between {
+        justify-content: space-between;
+    }
+
+    &.align-center {
+        align-items: center;
+    }
+}
+
+.width-auto {
+    width: auto;
+}
